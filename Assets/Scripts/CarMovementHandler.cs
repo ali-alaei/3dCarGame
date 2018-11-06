@@ -25,7 +25,25 @@ public class CarMovementHandler : MonoBehaviour {
         transform.Translate(Vector3.forward * carSpeed * Time.deltaTime);
 
     }
-	// Use this for initialization
+	private void CarMoveHandler()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(Vector3.left * carSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(Vector3.right * carSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(Vector3.back * carSpeed * Time.deltaTime);
+            carSpeed = 0.0f;
+        }
+
+    }
+    
+    // Use this for initialization
 	void Start () {
 		
 	}
@@ -34,5 +52,6 @@ public class CarMovementHandler : MonoBehaviour {
 	void Update () {
 
         CarSpeedController();
+        CarMoveHandler();
     }
 }
