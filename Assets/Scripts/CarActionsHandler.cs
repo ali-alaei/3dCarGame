@@ -6,10 +6,12 @@ using UnityEngine;
 public class CarActionsHandler : MonoBehaviour {
 
     private const float defaultSpeed = 8.0f;
-    public AudioClip carHorn;
+    public AudioClip CarHorn;
+    public GameObject RightLight;
+    public GameObject LeftLight;
     private AudioSource horn;
-    private Light[] carLights;
     private float carSpeed = defaultSpeed;
+
     private void CarSpeedController()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -51,32 +53,31 @@ public class CarActionsHandler : MonoBehaviour {
     }
 
     private void TurnOnLightsAndHorn()
-    { 
-        foreach (Light light in carLights)
+    {
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            if (Input.GetKey(KeyCode.P))
-            {
-                light.enabled = true;
-                //carHorn.Play(0);
-                horn.Play(0);
-            }
-            else
-            {
-                light.enabled = false;
-                horn.Pause();
-                //carHorn.Pause();
-            }
-                
+            RightLight.SetActive(true);
+            LeftLight.SetActive(true);
+            horn.Play(0);
         }
+        else if (Input.GetKeyUp(KeyCode.P))
+        {
+            RightLight.SetActive(false);
+            LeftLight.SetActive(false);
+            horn.Pause();
+            
+        }
+        
+       
     }
 
     
     // Use this for initialization
 	void Awake () {
         
-        carLights = GetComponentsInChildren<Light>();
+        
         horn = GetComponent<AudioSource>();
-        //carHorn = GetComponentInChildren<AudioClip>();
+        
 
     }
 	
