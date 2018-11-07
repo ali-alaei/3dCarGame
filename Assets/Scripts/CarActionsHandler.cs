@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class CarMovementHandler : MonoBehaviour {
+public class CarActionsHandler : MonoBehaviour {
+
     private const float defaultSpeed = 8.0f;
     public AudioClip carHorn;
     private AudioSource horn;
@@ -50,11 +51,7 @@ public class CarMovementHandler : MonoBehaviour {
     }
 
     private void TurnOnLightsAndHorn()
-
-
-    {
-        
-        
+    { 
         foreach (Light light in carLights)
         {
             if (Input.GetKey(KeyCode.P))
@@ -68,13 +65,9 @@ public class CarMovementHandler : MonoBehaviour {
                 light.enabled = false;
                 horn.Pause();
                 //carHorn.Pause();
-
-      
             }
                 
         }
-
-        
     }
 
     

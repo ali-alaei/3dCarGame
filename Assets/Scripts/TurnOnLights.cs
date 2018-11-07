@@ -3,21 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnOnLights : MonoBehaviour {
-    private void OnTriggerEnter(Collider other)
+    private Light[] carLights;
+    private void OnTriggerEnter(Collider car)
     {
-        
+        Debug.Log("entered");
+        carLights = car.GetComponentsInChildren<Light>();
+        foreach (Light light in carLights)
+        {
+            Debug.Log(carLights.Length);
+            Debug.Log("in for");
+            light.gameObject.SetActive(true);
+        }
+       
     }
-    private void OnTriggerExit(Collider other)
+
+    
+
+    private void OnTriggerExit(Collider car)
     {
-        
+        Debug.Log("exit");
+        foreach (Light light in carLights)
+        {
+            Debug.Log("in for");
+            light.gameObject.SetActive(false);
+        }
+      
     }
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void Update()
+    {
+     
+
+    }
 }
