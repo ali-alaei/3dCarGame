@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class CarMovementHandler : MonoBehaviour {
     private const float defaultSpeed = 8.0f;
-    private float carSpeed = defaultSpeed; 
+    public AudioClip carHorn;
+    private AudioSource horn;
+    private Light[] carLights;
+    private float carSpeed = defaultSpeed;
     private void CarSpeedController()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             carSpeed = carSpeed / 2;
-
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -46,16 +48,50 @@ public class CarMovementHandler : MonoBehaviour {
         }
 
     }
+
+    private void TurnOnLightsAndHorn()
+
+
+    {
+        
+        
+        foreach (Light light in carLights)
+        {
+            if (Input.GetKey(KeyCode.P))
+            {
+                light.enabled = true;
+                //carHorn.Play(0);
+                horn.Play(0);
+            }
+            else
+            {
+                light.enabled = false;
+                horn.Pause();
+                //carHorn.Pause();
+
+      
+            }
+                
+        }
+
+        
+    }
+
     
     // Use this for initialization
-	void Start () {
-		
-	}
+	void Awake () {
+        
+        carLights = GetComponentsInChildren<Light>();
+        horn = GetComponent<AudioSource>();
+        //carHorn = GetComponentInChildren<AudioClip>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
         CarSpeedController();
         CarMoveHandler();
+        TurnOnLightsAndHorn();
     }
 }
